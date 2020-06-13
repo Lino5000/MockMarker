@@ -16,5 +16,5 @@ def ChooseQuestion(questions, window):
     print("continuing in 2 sec")
     end = time.time() + 2
     while time.time() < end:
-        window.update()
+        window.update()  # This is needed to keep the window responsive while waiting
     return questions[0]
