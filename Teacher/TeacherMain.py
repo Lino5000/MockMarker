@@ -1,4 +1,5 @@
 import tkinter as tk
+import os.path as path
 from Teacher.ChooseQuestion import ChooseQuestion
 from Teacher.DisplayQuestion import DisplayQuestion
 from Teacher.LoadQuestions import LoadQuestions
@@ -8,7 +9,9 @@ class TeacherMain:
     def __init__(self):
         self.window = tk.Tk()  # Create the window
 
-        self.questions = LoadQuestions("Questions.txt")
+        currentPath = path.abspath(path.curdir) + "/Teacher/"  # TODO: Update Path for build version
+        self.questions = LoadQuestions(currentPath + "Questions.txt")
+        print(self.questions[0])
 
         try:
             self.window.after(0, self.loop)  # Start the custom loop
