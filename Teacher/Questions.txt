@@ -2,7 +2,7 @@
 
 Quest: INVS-7-1
 Desc: Graphing and Tabulation
-Img: INVS-7-1.jpg
+Img: INVS-7-1.jpeg
 
 Quest: INVS-7-2
 Desc: Interpreting Models
