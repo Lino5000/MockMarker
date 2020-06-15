@@ -1,5 +1,5 @@
 import tkinter as tk
-import time
+from tkinter import ttk
 
 
 def clearWindow(window):
@@ -7,14 +7,37 @@ def clearWindow(window):
         widget.destroy()
 
 
+def submit():
+    # A callback function so that the submit button can change the submitted variable.
+    global submitted
+    submitted = True
+
+
+submitted = False
+
+
 def ChooseQuestion(questions, window):
-    # TODO: Stub
+    global submitted
     clearWindow(window)
-    label = tk.Label(window, text="Choosing Question")  # Create a Label
-    label.pack()  # Add the label the window - just puts it directly underneath the last element
-    window.update()  # Let the window know there's something new for it to deal with
-    print("continuing in 2 sec")
-    end = time.time() + 2
-    while time.time() < end:
-        window.update()  # This is needed to keep the window responsive while waiting
-    return questions[0]
+    titleLabel = tk.Label(window, text="Choose a Question:")  # Make the Label
+    titleLabel.grid(column=0, row=0, padx=15, pady=5)  # Place the label on the screen
+
+    questionList = ttk.Treeview(window)  # Make the TreeView list
+    questionList.heading("#0", text="Question", anchor=tk.W)  # Set the heading of the list
+    for index in range(len(questions)):
+        if questions[index].Desc is not None:
+            item = questions[index].Desc
+        else:
+            item = questions[index].Code
+        questionList.insert("", "end", text=item)  # Add an item to the list with the correct text
+    questionList.grid(column=0, row=1, padx=5)  # Place the list on the screen
+
+    submitted = False
+    submitButton = tk.Button(window, text="Show Question", command=submit)
+    submitButton.grid(row=5, column=0, pady=15)
+
+    while not submitted:
+        window.update()  # Tell tkinter to repeatedly update the screen. Handles display and input.
+
+    selectedIndex = questionList.index(questionList.focus())
+    return questions[selectedIndex]

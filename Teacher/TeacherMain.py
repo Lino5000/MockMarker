@@ -8,10 +8,10 @@ from Teacher.LoadQuestions import LoadQuestions
 class TeacherMain:
     def __init__(self):
         self.window = tk.Tk()  # Create the window
+        self.window.grid()
 
         currentPath = path.abspath(path.curdir) + "/Teacher/"  # TODO: Update Path for build version
         self.questions = LoadQuestions(currentPath + "Questions.txt")
-        print(self.questions[0])
 
         try:
             self.window.after(0, self.loop)  # Start the custom loop
@@ -25,7 +25,8 @@ class TeacherMain:
             question = ChooseQuestion(self.questions, self.window)
             DisplayQuestion(question, self.window)
         except tk.TclError:
-            # Most likely, the window has been closed, so just finish.
+            # Most likely, the window has been closed, so just put something in the log and finish.
+            print("Exception")
             pass
         self.window.after(0, self.loop)  # Start the next cycle of the loop
 

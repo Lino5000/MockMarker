@@ -9,12 +9,12 @@ def clearWindow(window):
 
 def DisplayQuestion(question, window):
     # TODO: Stub
-    clearWindow(window)  # Create a Label
-    label = tk.Label(window,
-                     text=question)  # Add the label to the window - just puts it directly underneath the last element
-    label.pack()  # Let the window know there's something new for it to deal with
-    window.update()
+    clearWindow(window)
+    label = tk.Label(window, text=question)  # Create a Label
+    label.grid(row=0, column=0)  # Add the label to the window - just puts it directly underneath the last element
+    window.update()  # Let the window know there's something new for it to deal with
     print("continuing in 2 sec")
     end = time.time() + 2
     while time.time() < end:
         window.update()  # This is needed to keep the window responsive while waiting
+    print('continue...')

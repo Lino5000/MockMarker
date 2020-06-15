@@ -3,3 +3,8 @@
 Quest: INVS-7-1
 Desc: Graphing and Tabulation
 Img: INVS-7-1.jpg
+
+Quest: INVS-7-2
+Desc: Interpreting Models
+
+Quest: INVS-7-3

@@ -7,7 +7,7 @@ class Question:
 
     def __str__(self):
         # Defines how to print an instance, just used for debugging.
-        return self.Code + ', "' + self.Desc + '", ' + self.Img
+        return str(self.Code) + ', "' + str(self.Desc) + '", ' + str(self.Img)
 
 
 def LoadQuestions(filename):
