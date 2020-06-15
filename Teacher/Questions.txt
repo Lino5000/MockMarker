@@ -6,5 +6,6 @@ Img: INVS-7-1.jpeg
 
 Quest: INVS-7-2
 Desc: Interpreting Models
+Img: This-Image-Does-Not-Exist.jpg
 
 Quest: INVS-7-3

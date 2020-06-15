@@ -10,8 +10,8 @@ class TeacherMain:
         self.window = tk.Tk()  # Create the window
         self.window.grid()
 
-        currentPath = path.abspath(path.curdir) + "/Teacher/"  # TODO: Update Path for build version
-        self.questions = LoadQuestions(currentPath + "Questions.txt")
+        currentPath = path.abspath("./Teacher")  # TODO: Update Path for build version
+        self.questions = LoadQuestions(currentPath + "/Questions.txt")
 
         try:
             self.window.after(0, self.loop)  # Start the custom loop
