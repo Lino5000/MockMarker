@@ -9,6 +9,9 @@ class TeacherMain:
     def __init__(self):
         self.window = tk.Tk()  # Create the window
         self.window.grid()
+        WIDTH = self.window.winfo_screenwidth()
+        HEIGHT = self.window.winfo_screenheight()
+        self.window.geometry(f"{WIDTH}x{HEIGHT}")
 
         currentPath = path.abspath("./Teacher")  # TODO: Update Path for build version
         self.questions = LoadQuestions(currentPath + "/Questions.txt")

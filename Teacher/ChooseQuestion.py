@@ -18,11 +18,15 @@ submitted = False
 
 def ChooseQuestion(questions, window):
     global submitted
+    WIDTH = window.winfo_screenwidth()
+    HEIGHT = window.winfo_screenheight()
     clearWindow(window)
     titleLabel = tk.Label(window, text="Choose a Question:")  # Make the Label
     titleLabel.grid(column=0, row=0, padx=15, pady=5)  # Place the label on the screen
 
-    questionList = ttk.Treeview(window)  # Make the TreeView list
+    questionList = ttk.Treeview(window, height=(int(HEIGHT / 22)))  # Make the TreeView list
+    xPadding = 10
+    questionList.column("#0", width=(WIDTH - 2 * xPadding - 5))
     questionList.heading("#0", text="Question", anchor=tk.W)  # Set the heading of the list
     for index in range(len(questions)):
         if questions[index].Desc is not None:
@@ -30,7 +34,7 @@ def ChooseQuestion(questions, window):
         else:
             item = questions[index].Code
         questionList.insert("", "end", text=item)  # Add an item to the list with the correct text
-    questionList.grid(column=0, row=1, padx=5)  # Place the list on the screen
+    questionList.grid(column=0, row=1, padx=xPadding)  # Place the list on the screen
 
     submitted = False
     submitButton = tk.Button(window, text="Show Question", command=submit)
