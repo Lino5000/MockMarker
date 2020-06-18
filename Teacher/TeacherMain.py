@@ -12,6 +12,7 @@ class TeacherMain:
         WIDTH = self.window.winfo_screenwidth()
         HEIGHT = self.window.winfo_screenheight()
         self.window.geometry(f"{WIDTH}x{HEIGHT}")
+        self.window.resizable(False, False)
 
         currentPath = path.abspath("./Teacher")  # TODO: Update Path for build version
         self.questions = LoadQuestions(currentPath + "/Questions.txt")

@@ -26,7 +26,8 @@ def ChooseQuestion(questions, window):
 
     questionList = ttk.Treeview(window, height=(int(HEIGHT / 22)))  # Make the TreeView list
     xPadding = 10
-    questionList.column("#0", width=(WIDTH - 2 * xPadding - 5))
+    listWidth = WIDTH - 2 * xPadding - 5
+    questionList.column("#0", width=listWidth, minwidth=listWidth)
     questionList.heading("#0", text="Question", anchor=tk.W)  # Set the heading of the list
     for index in range(len(questions)):
         if questions[index].Desc is not None:

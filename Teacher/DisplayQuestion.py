@@ -12,7 +12,8 @@ def clearWindow(window):
 def loadImage(imageName):
     # Loads the image called imageName from the Images Folder, and puts it in a tkinter compatible object.
     p = path.abspath("./Teacher/Images/" + imageName)
-    return ImageTk.PhotoImage(Image.open(p))
+    img = Image.open(p)
+    return ImageTk.PhotoImage(img)
 
 
 popOpen = True
@@ -68,7 +69,10 @@ def done():
 
 def DisplayQuestion(question, window):
     global showing
+    WIDTH = window.winfo_screenwidth()
+    HEIGHT = window.winfo_screenheight()
     clearWindow(window)
+    alignmentFrame = tk.Frame(window)
     imagePresent = False
     contBoolean = True
     if question.Img is not None:
@@ -81,19 +85,26 @@ def DisplayQuestion(question, window):
         contBoolean = displayPopup(1)
 
     if contBoolean:
-        codeLabel = tk.Label(window, text=question.Code)
-        codeLabel.grid(row=0, column=1, sticky='ne', padx=10, pady=15)
+        codeLabel = tk.Label(alignmentFrame, text=question.Code)
+        codeLabel.grid(row=0, column=1, sticky='ne', pady=15)
 
         if imagePresent:
-            imageLabel = tk.Label(window, image=questionImage)
-            imageLabel.grid(row=1, column=0, columnspan=2, padx=20, pady=5)
+            imageLabel = tk.Label(alignmentFrame, image=questionImage)
+            imageLabel.grid(row=1, column=0, columnspan=2, pady=5)
 
         if question.Desc is not None:
-            descLabel = tk.Label(window, text=question.Desc)
+            descLabel = tk.Label(alignmentFrame, text=question.Desc)
             descLabel.grid(row=2, column=0, columnspan=2, pady=5)
 
-        doneButton = tk.Button(window, text="Done", command=done)
+        doneButton = tk.Button(alignmentFrame, text="Done", command=done)
         doneButton.grid(row=3, column=0, columnspan=2, pady=5)
+
+        # Work out the width of the frame and move it to the center of the screen. Unfortunately causes the question
+        # to appear briefly on screen before moving, but there is not enough time to fix it right now.
+        alignmentFrame.grid(row=0, column=0)
+        alignmentFrame.update()
+        alignmentFrame.grid_forget()
+        alignmentFrame.grid(row=0, column=0, padx=(WIDTH - alignmentFrame.winfo_width()) / 2)
 
         showing = True
         while showing:
