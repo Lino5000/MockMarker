@@ -1,4 +1,5 @@
 class Question:
+    # A record that stores a single question's information.
     def __init__(self, code):
         # Default Values, will mostly be overwritten.
         self.Code = code  # A question can't be created without a code.
@@ -11,6 +12,7 @@ class Question:
 
 
 def LoadQuestions(filename):
+    # Opens the question file and processes the information to create the question list.
     with open(filename, "r") as fileData:
         lines = fileData.readlines()
         questions = []

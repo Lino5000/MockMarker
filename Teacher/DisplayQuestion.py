@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import os.path as path
 
 
+# Multiple subprograms needed to make DisplayQuestion work.
 def clearWindow(window):
     # Get all the elements in the window and destroy them
     for widget in window.winfo_children():
@@ -16,6 +17,7 @@ def loadImage(imageName):
     return ImageTk.PhotoImage(img)
 
 
+# This section is related to the Popup for a missing Image.
 popOpen = True
 shouldContinue = True
 
@@ -58,6 +60,7 @@ def displayPopup(Type):
     return shouldContinue
 
 
+# The Following Section is the DisplayQuestion subprogram itself, which is called y the TeacherMain program.
 showing = True
 
 
@@ -70,7 +73,6 @@ def done():
 def DisplayQuestion(question, window):
     global showing
     WIDTH = window.winfo_screenwidth()
-    HEIGHT = window.winfo_screenheight()
     clearWindow(window)
     alignmentFrame = tk.Frame(window)
     imagePresent = False
@@ -100,7 +102,9 @@ def DisplayQuestion(question, window):
         doneButton.grid(row=3, column=0, columnspan=2, pady=5)
 
         # Work out the width of the frame and move it to the center of the screen. Unfortunately causes the question
-        # to appear briefly on screen before moving, but there is not enough time to fix it right now.
+        # to appear briefly on screen before moving, but there is not enough time to fix it right now. This weird
+        # process seems to be required because tkinter doesn't calculate the width of everything until it has been
+        # displayed.
         alignmentFrame.grid(row=0, column=0)
         alignmentFrame.update()
         alignmentFrame.grid_forget()

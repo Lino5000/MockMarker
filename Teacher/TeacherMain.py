@@ -6,6 +6,7 @@ from Teacher.LoadQuestions import LoadQuestions
 
 
 class TeacherMain:
+    # The root class of the application, initialises the window and calls the other modules in a loop.
     def __init__(self):
         self.window = tk.Tk()  # Create the window
         self.window.grid()
@@ -20,8 +21,8 @@ class TeacherMain:
         try:
             self.window.after(0, self.loop)  # Start the custom loop
         except tk.TclError:
-            # Most likely, the window has been closed, though unusually fast
-            pass
+            # Can't be the window closing, something else has gone wrong.
+            print("Exception before launch")
         self.window.mainloop()  # Start the library's window loop - handles inputs and display
 
     def loop(self):  # Has to be a separate function so it can be passed as a callback

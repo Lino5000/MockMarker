@@ -3,7 +3,8 @@ from tkinter import ttk
 
 
 def clearWindow(window):
-    for widget in window.winfo_children():  # Get all the elements in the window and destroy them
+    # Get all the elements in the window and destroy them
+    for widget in window.winfo_children():
         widget.destroy()
 
 
@@ -13,6 +14,7 @@ def submit():
     submitted = True
 
 
+# The rest of this file is the subprogram to open and manage the screen.
 submitted = False
 
 
