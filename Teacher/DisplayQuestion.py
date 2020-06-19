@@ -91,6 +91,7 @@ def DisplayQuestion(question, window):
         codeLabel.grid(row=0, column=1, sticky='ne', pady=15)
 
         if imagePresent:
+            # PyCharm reckons questionImage may not be set, but it will because that's the way imagePresent gets set.
             imageLabel = tk.Label(alignmentFrame, image=questionImage)
             imageLabel.grid(row=1, column=0, columnspan=2, pady=5)
 
