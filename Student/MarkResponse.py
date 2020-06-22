@@ -10,8 +10,8 @@ class Marks:
         self.NegScore = 0
 
     def __str__(self):
-        return str(self.Band) + "Pos: " + str(self.PosList) + str(self.PosScore) + \
-               "Neg: " + str(self.NegList) + str(self.NegScore)
+        return str(self.Band) + " Pos: " + str(self.PosList) + str(self.PosScore) + \
+               " Neg: " + str(self.NegList) + str(self.NegScore)
 
 
 def isLetter(char):
@@ -66,3 +66,14 @@ def MarkResponse(studentBand, studentPos, studentNeg, question):
     studentMark.NegScore = 1 - (len(studentMark.NegList) / len(question.Neg))
 
     return studentMark
+
+
+if __name__ == "__main__":
+    # Should never run in the final program, just a short routine to test that the code works.
+    from LoadQuestions import Question
+
+    question = Question("Code")
+    question.Band = 4
+    question.Pos = ['a', 'b']
+    question.Neg = ['c d', 'e']
+    print(MarkResponse("3-4", " a. ", " c de.", question))
