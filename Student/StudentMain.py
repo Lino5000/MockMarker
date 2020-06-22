@@ -15,7 +15,7 @@ class StudentMain:
         self.window.geometry(f"{WIDTH}x{HEIGHT}")
         self.window.resizable(False, False)
 
-        currentPath = path.abspath("./Student")  # TODO: Update Path for build version
+        currentPath = path.abspath(".")  # TODO: Update Path for build version
         self.questions = LoadQuestions(currentPath + "/Questions.txt")
 
         try:
