@@ -65,15 +65,18 @@ def LoadQuestions(filename):
                 temp = ""
                 for wordIndex in range(1, len(words)):
                     temp += ' ' + words[wordIndex]
-                # Little trick to retain the spaces without having extras. map() applies the .strip() function to
-                # every item in the list, then it needs to be converted back to a list.
-                questions[qIndex].Pos = list(map((lambda x: x.strip(' ')), temp.split(',')))
+                # Split at ',' and remove trailing spaces.
+                for item in temp.split(','):
+                    questions[qIndex].Pos.append(item.strip(' '))
             elif words[0] == "Neg:":
                 temp = ""
                 for wordIndex in range(1, len(words)):
-                    temp += words[wordIndex]
-                # Same little map() trick as in Pos case.
-                questions[qIndex].Neg = list(map((lambda x: x.strip(' ')), temp.split(',')))
+                    temp += ' ' + words[wordIndex]
+                print(temp)
+                # Split at ',' and remove trailing spaces.
+                for item in temp.split(','):
+                    print(item)
+                    questions[qIndex].Neg.append(item.strip(' '))
             else:
                 pass  # Just to make it explicit.
         if not isCompleteQuestion(questions[qIndex]):

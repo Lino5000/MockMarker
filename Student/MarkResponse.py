@@ -33,7 +33,7 @@ def IsIn(word, string):
         if match:
             if index + wIndex >= len(string) or not isLetter(string[index + wIndex]):
                 # The match is at the end of a word (either end of string or no more letters in word)
-                if not isLetter(string[index - 1]):
+                if not isLetter(string[index - 1]) or index == 0:
                     # The match is at the start of a word
                     found = True
                 else:
@@ -72,8 +72,8 @@ if __name__ == "__main__":
     # Should never run in the final program, just a short routine to test that the code works.
     from LoadQuestions import Question
 
-    question = Question("Code")
-    question.Band = 4
-    question.Pos = ['a', 'b']
-    question.Neg = ['c d', 'e']
-    print(MarkResponse("3-4", " a. ", " c de.", question))
+    test = Question("Code")
+    test.Band = 4
+    test.Pos = ['a', 'b']
+    test.Neg = ['c d', 'e']
+    print(MarkResponse("3-4", " a. ", " c de.", test))
