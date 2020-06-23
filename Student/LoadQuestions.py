@@ -72,10 +72,8 @@ def LoadQuestions(filename):
                 temp = ""
                 for wordIndex in range(1, len(words)):
                     temp += ' ' + words[wordIndex]
-                print(temp)
                 # Split at ',' and remove trailing spaces.
                 for item in temp.split(','):
-                    print(item)
                     questions[qIndex].Neg.append(item.strip(' '))
             else:
                 pass  # Just to make it explicit.
