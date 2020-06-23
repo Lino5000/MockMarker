@@ -1,5 +1,12 @@
 import tkinter as tk
 
+
+def clearWindow(window):
+    # Get all the elements in the window and destroy them
+    for widget in window.winfo_children():
+        widget.destroy()
+
+
 popOpen = False
 
 
@@ -47,6 +54,7 @@ def EnterCode(possibleQuestions, window):
     global buttonPressed
     buttonPressed = False
     submitted = False
+    clearWindow(window)
     tk.Label(window, text="Please enter a Question Code:").grid(row=0, column=0, padx=10, pady=5)
     inputCode = tk.StringVar(window)
     tk.Entry(window, textvariable=inputCode, width=29).grid(row=1, column=0, padx=10, pady=5)
