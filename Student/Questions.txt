@@ -1,4 +1,48 @@
-Quest: INVS-7-1
-Band: 5
-Pos: a, b c, d
-Neg: d, e f, g
+// Hi, this is the file for the Student part of questions.
+
+Quest: BIO-02-22
+Band: 6
+Pos: Correct data, table, headings, size
+Neg: Title, frequency, calculation
+
+Quest: BIO-10-22
+Band: 4
+// Don't actually have a "4-5" option, so I figured it would more likely be a 4 given the number of Negative points.
+Pos: graph, even numbering, even spacing, key
+Neg: Title, x-axis label, even spacing of columns, column graph, line of best fit
+
+Quest: BIO-01-29ai
+Band: 6
+Pos: content knowledge
+Neg: 
+
+Quest: BIO-01-29aii
+Band: 6
+Pos: content knowledge, identify structure, identify function
+Neg: 
+
+Quest: BIO-01-29bi
+Band: 6
+Pos: secondary investigation, primary investigation
+Neg: did not describe
+
+Quest: BIO-01-29bii
+Band: 6
+Pos: repetition, currency of information, reliability of qualitative data
+Neg: did not assess, no relevance
+
+Quest: BIO-01-29c
+Band: 6
+Pos: Definition, description of technology, states how effects are overcome
+Neg: only one technology
+
+Quest: BIO-01-29d
+Band: 6
+Pos: diagram, detailed procedure, correct conclusion, justification, validity, answers the question
+Neg: reliability
+
+Quest: BIO-01-29e
+Band: 6
+Pos: names two technologies, description of cochlear, benefits of cochlear, limitation of cochlear
+Neg: no judgement, description of hearing aid, no evaluation
+

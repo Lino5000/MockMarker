@@ -23,6 +23,7 @@ def ChooseQuestion(questions, window):
     WIDTH = window.winfo_screenwidth()
     HEIGHT = window.winfo_screenheight()
     clearWindow(window)
+    window.title("MockMarker - Choose a Question")
     titleLabel = tk.Label(window, text="Choose a Question:")  # Make the Label
     titleLabel.grid(column=0, row=0, padx=15, pady=5)  # Place the label on the screen
 

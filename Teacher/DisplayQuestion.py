@@ -12,7 +12,7 @@ def clearWindow(window):
 
 def loadImage(imageName):
     # Loads the image called imageName from the Images Folder, and puts it in a tkinter compatible object.
-    p = path.abspath("./Teacher/Images/" + imageName)
+    p = path.abspath("./Teacher/Images/" + imageName)  # TODO: Update Path
     img = Image.open(p)
     return ImageTk.PhotoImage(img)
 
@@ -38,6 +38,7 @@ def displayPopup(Type):
     global popOpen, shouldContinue
     popup = tk.Tk()  # Make new window.
     popup.grid()
+    popup.title("Warning")
     popOpen = True
 
     if Type == 0:
@@ -73,13 +74,15 @@ def done():
 def DisplayQuestion(question, window):
     global showing
     WIDTH = window.winfo_screenwidth()
+    HEIGHT = window.winfo_screenheight()
     clearWindow(window)
+    window.title("MockMarker - Question: " + question.Code)
     alignmentFrame = tk.Frame(window)
     imagePresent = False
     contBoolean = True
     if question.Img is not None:
         try:
-            questionImage = loadImage(question.Img)
+            questionImage = loadImage(question.Img, WIDTH, HEIGHT)
             imagePresent = True
         except FileNotFoundError:
             contBoolean = displayPopup(0)
