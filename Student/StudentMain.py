@@ -10,8 +10,11 @@ class StudentMain:
     def __init__(self):
         self.window = tk.Tk()  # Create the window
         self.window.grid()
-        WIDTH = self.window.winfo_screenwidth()
-        HEIGHT = self.window.winfo_screenheight()
+        # TODO: Implement Support for different screen sizes.
+        # WIDTH = self.window.winfo_screenwidth()
+        # HEIGHT = self.window.winfo_screenheight()
+        WIDTH = 1280
+        HEIGHT = 800
         self.window.geometry(f"{WIDTH}x{HEIGHT}")
         self.window.resizable(False, False)
 

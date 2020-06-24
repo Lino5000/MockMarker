@@ -39,30 +39,30 @@ def DisplayQuestion(question, window):
 
     # Step 1: Take input
     codeLabel = tk.Label(window, text=question.Code)
-    codeLabel.grid(row=0, column=1, padx=5, pady=5)
+    codeLabel.grid(row=0, column=1, padx=5, pady=5, sticky='ne')
 
     bandLabel = tk.Label(window, text="Overall Band:")
-    bandLabel.grid(row=1, column=0, padx=10, pady=2)
+    bandLabel.grid(row=1, column=0, columnspan=2, padx=10, pady=2)
     bandDropDownValue = tk.StringVar(window, "Choose a Band")
     bandDropDown = tk.OptionMenu(window, bandDropDownValue, "1-2", "3-4", "5-6")
-    bandDropDown.grid(row=2, column=0, padx=20, pady=3)
+    bandDropDown.grid(row=2, column=0, columnspan=2, padx=20, pady=3)
 
     posLabel = tk.Label(window, text="Good Points:")
-    posLabel.grid(row=3, column=0, padx=10, pady=2)
+    posLabel.grid(row=3, column=0, columnspan=2, padx=10, pady=2)
     posTextBorder = tk.Frame(window, bg='black')
-    posTextBox = ScrolledText(posTextBorder, height=10, width=150, wrap=tk.WORD, bd=0, bg='light grey')
+    posTextBox = ScrolledText(posTextBorder, height=8, width=100, wrap=tk.WORD, bd=0, bg='light grey')
     posTextBox.grid(row=0, column=0, padx=3, pady=3)
     posTextBorder.grid(row=4, column=0, columnspan=2, padx=10, pady=3)
 
     negLabel = tk.Label(window, text="Poor Points:")
-    negLabel.grid(row=5, column=0, padx=10, pady=2)
+    negLabel.grid(row=5, column=0, columnspan=2, padx=10, pady=2)
     negTextBorder = tk.Frame(window, bg='black')
-    negTextBox = ScrolledText(negTextBorder, height=10, width=150, wrap=tk.WORD, bd=0, bg='light grey')
+    negTextBox = ScrolledText(negTextBorder, height=8, width=100, wrap=tk.WORD, bd=0, bg='light grey')
     negTextBox.grid(row=0, column=0, padx=3, pady=3)
     negTextBorder.grid(row=6, column=0, columnspan=2, padx=10, pady=3)
 
     markButton = tk.Button(window, text="Mark", command=startMarking)
-    markButton.grid(row=7, column=0, columnspan=2, padx=50, pady=5)
+    markButton.grid(row=7, column=0, columnspan=2, padx=30, pady=5)
 
     while answering:
         window.update()
@@ -83,15 +83,15 @@ def DisplayQuestion(question, window):
     negLabel = tk.Label(window, text="Poor Points:")
 
     posTextBorder = tk.Frame(window, bg='black')
-    posTextBox = ScrolledText(posTextBorder, height=10, width=150, wrap=tk.WORD, bd=0, bg='light grey')
+    posTextBox = ScrolledText(posTextBorder, height=16, width=60, wrap=tk.WORD, bd=0, bg='light grey')
     posTextBox.insert(tk.END, studentPos)
-    posTextBox.config(state=tk.DISABLED, width=75, height=23)
+    posTextBox.config(state=tk.DISABLED)
     posTextBox.grid(row=0, column=0, padx=3, pady=3)
 
     negTextBorder = tk.Frame(window, bg='black')
-    negTextBox = ScrolledText(negTextBorder, height=10, width=150, wrap=tk.WORD, bd=0, bg='light grey')
+    negTextBox = ScrolledText(negTextBorder, height=16, width=60, wrap=tk.WORD, bd=0, bg='light grey')
     negTextBox.insert(tk.END, studentNeg)
-    negTextBox.config(state=tk.DISABLED, width=75, height=23)
+    negTextBox.config(state=tk.DISABLED)
     negTextBox.grid(row=0, column=0, padx=3, pady=3)
 
     bandDropLabel = tk.Label(window, text="Band: " + studentBand)
@@ -112,7 +112,7 @@ def DisplayQuestion(question, window):
         posExpected = ''
     posExpectedTextBorder = tk.Frame(window, bg='black')
     posExpectedText = ScrolledText(
-        posExpectedTextBorder, wrap=tk.WORD, width=75, height=23, bg='light grey'
+        posExpectedTextBorder, wrap=tk.WORD, width=60, height=16, bg='light grey'
     )
     posExpectedText.insert(tk.END, posExpected)
     posExpectedText.config(state=tk.DISABLED)
@@ -129,7 +129,7 @@ def DisplayQuestion(question, window):
         negExpected = ''
     negExpectedTextBorder = tk.Frame(window, bg='black')
     negExpectedText = ScrolledText(
-        negExpectedTextBorder, wrap=tk.WORD, width=75, height=23, bg='light grey'
+        negExpectedTextBorder, wrap=tk.WORD, width=60, height=16, bg='light grey'
     )
     negExpectedText.insert(tk.END, negExpected)
     negExpectedText.config(state=tk.DISABLED)
