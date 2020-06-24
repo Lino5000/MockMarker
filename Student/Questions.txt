@@ -43,6 +43,6 @@ Neg: reliability
 
 Quest: BIO-01-29e
 Band: 6
-Pos: names two technologies, description of cochlear, benefits of cochlear, limitation of cochlear
+Pos: names two technologies, description of cochlear, benefits of cochlear, limitation of cochlear, Concise, accurate information, scientific terminology
 Neg: no judgement, description of hearing aid, no evaluation
 

@@ -30,7 +30,7 @@ def IsIn(word, string):
             if word[wIndex].lower() != string[index + wIndex].lower():
                 match = False
             wIndex += 1
-        if match:
+        if match and not len(string) == 0:
             if index + wIndex >= len(string) or not isLetter(string[index + wIndex]):
                 # The match is at the end of a word (either end of string or no more letters in word)
                 if not isLetter(string[index - 1]) or index == 0:
@@ -40,6 +40,8 @@ def IsIn(word, string):
                     index += 1
             else:
                 index += 1
+        elif len(word) == 0:
+            found = True
         else:
             index += 1
     return found
