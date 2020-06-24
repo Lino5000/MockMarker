@@ -1,11 +1,39 @@
-// Hi, this is a test batch of questions.
+// Hi, this is the File for the Teacher part of questions.
 
-Quest: INVS-7-1
-Desc: Graphing and Tabulation
-Img: INVS-7-1.jpeg
+Quest: BIO-02-22
+Desc: Tabulation of data
+Img: BIO-02-22.jpg
 
-Quest: INVS-7-2
-Desc: Interpreting Models
-Img: This-Image-Does-Not-Exist.jpg
+Quest: BIO-10-22
+Desc: Graphing Data
+Img: BIO-10-22.jpg
 
-Quest: INVS-7-3
+// Wherever the description is the same, I have added something in brackets to differentiate them.
+Quest: BIO-01-29ai
+Desc: Content Knowledge – the eye (ai)
+Img: BIO-01-29ai.jpg
+
+Quest: BIO-01-29aii
+Desc: Content Knowledge – the eye (aii)
+Img: BIO-01-29aii.jpg
+
+Quest: BIO-01-29bi
+Desc: Content Knowledge – the ear
+Img: BIO-01-29bi.jpg
+
+Quest: BIO-01-29bii
+Desc: Relevance and reliability
+Img: BIO-01-29bii.jpg
+
+Quest: BIO-01-29c
+Desc: Content Knowledge – the eye and technology
+Img: BIO-01-29c.jpg
+
+Quest: BIO-01-29d
+Desc: Content Knowledge – Investigation of accommodation (d)
+Img: BIO-01-29d.jpg
+
+Quest: BIO-01-29e
+Desc: Content Knowledge – Investigation of accommodation (e)
+Img: BIO-01-29e.jpg
+

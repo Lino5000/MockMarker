@@ -10,10 +10,12 @@ def clearWindow(window):
         widget.destroy()
 
 
-def loadImage(imageName):
+def loadImage(imageName, WIDTH, HEIGHT):
     # Loads the image called imageName from the Images Folder, and puts it in a tkinter compatible object.
     p = path.abspath("./Teacher/Images/" + imageName)  # TODO: Update Path
     img = Image.open(p)
+    geom = (int(WIDTH * 0.8), int(HEIGHT * 0.7))
+    img = img.resize(geom)
     return ImageTk.PhotoImage(img)
 
 
