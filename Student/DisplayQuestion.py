@@ -12,8 +12,45 @@ def clearWindow(window):
 
 
 def MakeStrengthMeter(strength, window):
-    # TODO: Stub
-    return tk.Label(window, text=str(strength))
+    rectWidth = 20
+    rectHeight = 20
+    offset = 3  # Canvas Element has weird coordinates, need an offset so the border is visible.
+
+    meterCanvas = tk.Canvas(window, width=rectWidth * 4 + offset, height=rectHeight * 4 + offset, bg='white')
+
+    if strength >= 0.25:
+        colour1 = 'red'
+    else:
+        colour1 = 'grey'
+    meterCanvas.create_rectangle(
+        offset, rectHeight * 3 + offset, rectWidth + offset, rectHeight * 4 + offset, fill=colour1
+    )
+
+    if strength >= 0.5:
+        colour2 = 'orange'
+    else:
+        colour2 = 'grey'
+    meterCanvas.create_rectangle(
+        rectWidth + offset, rectHeight * 2 + offset, rectWidth * 2 + offset, rectHeight * 4 + offset, fill=colour2
+    )
+
+    if strength >= 0.75:
+        colour3 = 'yellow'
+    else:
+        colour3 = 'grey'
+    meterCanvas.create_rectangle(
+        rectWidth * 2 + offset, rectHeight + offset, rectWidth * 3 + offset, rectHeight * 4 + offset, fill=colour3
+    )
+
+    if strength >= 1:
+        colour4 = 'green'
+    else:
+        colour4 = 'grey'
+    meterCanvas.create_rectangle(
+        rectWidth * 3 + offset, offset, rectWidth * 4 + offset, rectHeight * 4 + offset, fill=colour4
+    )
+
+    return meterCanvas
 
 
 answering = True
