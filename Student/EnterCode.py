@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.font as font
 
 
 def clearWindow(window):
@@ -55,13 +56,40 @@ def EnterCode(possibleQuestions, window):
     buttonPressed = False
     submitted = False
     clearWindow(window)
-    tk.Label(window, text="Please enter a Question Code:").grid(row=0, column=0, padx=10, pady=5)
-    inputCode = tk.StringVar(window)
-    tk.Entry(window, textvariable=inputCode, width=29).grid(row=1, column=0, padx=10, pady=5)
-    tk.Button(window, text="Go!", command=submit).grid(row=2, column=0, padx=30, pady=5)
+    window.title("Enter Code")
+
+    alignmentFrame = tk.Frame(window)
+
+    # Change font to be a bit larger
+    defaultFont = font.nametofont("TkDefaultFont")
+    defaultFontSize = defaultFont.config()['size']
+    defaultFont.config(size=25)
+    window.option_add("*Font", defaultFont)
+
+    tk.Label(alignmentFrame, text="Please enter a Question Code:").grid(row=0, column=0, padx=10, pady=5)
+    inputCode = tk.StringVar(alignmentFrame)
+    tk.Entry(alignmentFrame, textvariable=inputCode, width=29).grid(row=1, column=0, padx=10, pady=5)
+    tk.Button(alignmentFrame, text="Go!", command=submit).grid(row=2, column=0, padx=30, pady=5)
+
     window.bind("<Return>", submit)  # Just a convenience thing, allow pressing Enter to trigger the submit button.
+
+    # Handle the alignment
+    # Work out the width of the frame and move it to the center of the screen. Unfortunately causes the question
+    # to appear briefly on screen before moving, but there is not enough time to fix it right now. This weird
+    # process seems to be required because tkinter doesn't calculate the width of everything until it has been
+    # displayed.
+    alignmentFrame.grid(row=0, column=0)
+    alignmentFrame.update()
+    alignmentFrame.grid_forget()
+    alignmentFrame.grid(
+        row=0,
+        column=0,
+        padx=(window.winfo_width() - alignmentFrame.winfo_width()) / 2,
+        pady=(window.winfo_height() - alignmentFrame.winfo_height()) / 2 - 20
+    )
+
     while not submitted:
-        window.update()
+        alignmentFrame.update()
         if buttonPressed:
             question = searchByCode(inputCode.get(), possibleQuestions)
             if question == "Invalid":
@@ -70,4 +98,5 @@ def EnterCode(possibleQuestions, window):
             else:
                 submitted = True
     window.unbind("<Return>")  # Don't want enter to trigger that function anymore, because the window is changing.
+    defaultFont.config(size=defaultFontSize)
     return question
