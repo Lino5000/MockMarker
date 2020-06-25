@@ -59,6 +59,7 @@ def EnterCode(possibleQuestions, window):
     window.title("Enter Code")
 
     alignmentFrame = tk.Frame(window)
+    alignmentFrame.config(bg='white')
 
     # Change font to be a bit larger
     defaultFont = font.nametofont("TkDefaultFont")
@@ -66,7 +67,7 @@ def EnterCode(possibleQuestions, window):
     defaultFont.config(size=25)
     window.option_add("*Font", defaultFont)
 
-    tk.Label(alignmentFrame, text="Please enter a Question Code:").grid(row=0, column=0, padx=10, pady=5)
+    tk.Label(alignmentFrame, text="Please enter a Question Code:", bg='white').grid(row=0, column=0, padx=10, pady=5)
     inputCode = tk.StringVar(alignmentFrame)
     tk.Entry(alignmentFrame, textvariable=inputCode, width=29).grid(row=1, column=0, padx=10, pady=5)
     tk.Button(alignmentFrame, text="Go!", command=submit).grid(row=2, column=0, padx=30, pady=5)

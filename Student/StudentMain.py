@@ -1,8 +1,8 @@
 import tkinter as tk
 import os.path as path
-from Student.EnterCode import EnterCode
-from Student.DisplayQuestion import DisplayQuestion
-from Student.LoadQuestions import LoadQuestions
+from EnterCode import EnterCode
+from DisplayQuestion import DisplayQuestion
+from LoadQuestions import LoadQuestions
 
 
 class StudentMain:
@@ -17,6 +17,7 @@ class StudentMain:
         HEIGHT = 800
         self.window.geometry(f"{WIDTH}x{HEIGHT}")
         self.window.resizable(False, False)
+        self.window.config(bg='white')
 
         currentPath = path.abspath(".")  # TODO: Update Path for build version
         self.questions = LoadQuestions(currentPath + "/Questions.txt")

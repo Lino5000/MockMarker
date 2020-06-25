@@ -16,7 +16,13 @@ def MakeStrengthMeter(strength, window):
     rectHeight = 20
     offset = 3  # Canvas Element has weird coordinates, need an offset so the border is visible.
 
-    meterCanvas = tk.Canvas(window, width=rectWidth * 4 + offset, height=rectHeight * 4 + offset, bg='white')
+    meterCanvas = tk.Canvas(
+        window,
+        width=rectWidth * 4 + offset,
+        height=rectHeight * 4 + offset,
+        bg='white',
+        highlightthickness=0
+    )
 
     if strength >= 0.25:
         colour1 = 'red'
@@ -76,25 +82,26 @@ def DisplayQuestion(question, window):
     window.title("Answering " + question.Code)
 
     alignmentFrame = tk.Frame(window)
+    alignmentFrame.config(bg='white')
 
     # Step 1: Take input
-    codeLabel = tk.Label(alignmentFrame, text=question.Code)
+    codeLabel = tk.Label(alignmentFrame, text=question.Code, bg='white')
     codeLabel.grid(row=0, column=1, padx=5, pady=5, sticky='ne')
 
-    bandLabel = tk.Label(alignmentFrame, text="Overall Band:")
+    bandLabel = tk.Label(alignmentFrame, text="Overall Band:", bg='white')
     bandLabel.grid(row=1, column=0, columnspan=2, padx=10, pady=2)
     bandDropDownValue = tk.StringVar(alignmentFrame, "Choose a Band")
     bandDropDown = tk.OptionMenu(alignmentFrame, bandDropDownValue, "1-2", "3-4", "5-6")
     bandDropDown.grid(row=2, column=0, columnspan=2, padx=20, pady=3)
 
-    posLabel = tk.Label(alignmentFrame, text="Good Points:")
+    posLabel = tk.Label(alignmentFrame, text="Good Points:", bg='white')
     posLabel.grid(row=3, column=0, columnspan=2, padx=10, pady=2)
     posTextBorder = tk.Frame(alignmentFrame, bg='black')
     posTextBox = ScrolledText(posTextBorder, height=8, width=100, wrap=tk.WORD, bd=0, bg='light grey')
     posTextBox.grid(row=0, column=0, padx=3, pady=3)
     posTextBorder.grid(row=4, column=0, columnspan=2, padx=10, pady=3)
 
-    negLabel = tk.Label(alignmentFrame, text="Poor Points:")
+    negLabel = tk.Label(alignmentFrame, text="Poor Points:", bg='white')
     negLabel.grid(row=5, column=0, columnspan=2, padx=10, pady=2)
     negTextBorder = tk.Frame(alignmentFrame, bg='black')
     negTextBox = ScrolledText(negTextBorder, height=8, width=100, wrap=tk.WORD, bd=0, bg='light grey')
@@ -134,9 +141,9 @@ def DisplayQuestion(question, window):
     window.title("Marks for " + question.Code)
 
     # Clearing the window means we need to re-make these elements.
-    codeLabel = tk.Label(alignmentFrame, text=question.Code)
-    posLabel = tk.Label(alignmentFrame, text="Good Points:")
-    negLabel = tk.Label(alignmentFrame, text="Poor Points:")
+    codeLabel = tk.Label(alignmentFrame, text=question.Code, bg='white')
+    posLabel = tk.Label(alignmentFrame, text="Good Points:", bg='white')
+    negLabel = tk.Label(alignmentFrame, text="Poor Points:", bg='white')
 
     posTextBorder = tk.Frame(alignmentFrame, bg='black')
     posTextBox = ScrolledText(posTextBorder, height=16, width=60, wrap=tk.WORD, bd=0, bg='light grey')
@@ -150,16 +157,16 @@ def DisplayQuestion(question, window):
     negTextBox.config(state=tk.DISABLED)
     negTextBox.grid(row=0, column=0, padx=3, pady=3)
 
-    bandDropLabel = tk.Label(alignmentFrame, text="Band: " + studentBand)
+    bandDropLabel = tk.Label(alignmentFrame, text="Band: " + studentBand, bg='white')
     bands = ['1-2', '3-4', '5-6']
     correctBand = bands[math.ceil(question.Band / 2) - 1]
-    correctBandLabel = tk.Label(alignmentFrame, text="Correct: " + correctBand)
+    correctBandLabel = tk.Label(alignmentFrame, text="Correct: " + correctBand, bg='white')
     if studentMark.Band:
         correctBandLabel.config(fg='dark green')
     else:
         correctBandLabel.config(fg='red')
 
-    posExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:")
+    posExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:", bg='white')
     if len(studentMark.PosList) > 0:
         posExpected = studentMark.PosList[0]
         for index in range(1, len(studentMark.PosList)):
@@ -176,7 +183,7 @@ def DisplayQuestion(question, window):
 
     posStrength = MakeStrengthMeter(studentMark.PosScore, alignmentFrame)
 
-    negExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:")
+    negExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:", bg='white')
     if len(studentMark.NegList) > 0:
         negExpected = studentMark.NegList[0]
         for index in range(1, len(studentMark.NegList)):
