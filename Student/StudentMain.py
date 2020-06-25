@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import os.path as path
 from EnterCode import EnterCode
 from DisplayQuestion import DisplayQuestion
@@ -20,14 +21,22 @@ class StudentMain:
         self.window.config(bg='white')
 
         currentPath = path.abspath(".")  # TODO: Update Path for build version
-        self.questions = LoadQuestions(currentPath + "/Questions.txt")
-
+        # Small error handling thing added very late in the process, to account for missing file.
         try:
-            self.window.after(0, self.loop)  # Start the custom loop
-        except tk.TclError:
-            # Can't be the window closing, something else has gone wrong.
-            print("Exception before launch")
-        self.window.mainloop()  # Start the tkinter library's window loop - handles inputs and display
+            self.questions = LoadQuestions(currentPath + "/Questions.txt")
+        except FileNotFoundError:
+            messagebox.showerror(
+                'File not found',
+                "The Questions.txt File could not be found. Please ensure the file is in the same folder as the " +
+                "executable. "
+            )
+        else:
+            try:
+                self.window.after(0, self.loop)  # Start the custom loop
+            except tk.TclError:
+                # Can't be the window closing, something else has gone wrong.
+                print("Exception before launch")
+            self.window.mainloop()  # Start the tkinter library's window loop - handles inputs and display
 
     def loop(self):
         try:
