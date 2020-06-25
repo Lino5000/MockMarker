@@ -27,7 +27,7 @@ def ChooseQuestion(questions, window):
     titleLabel = tk.Label(window, text="Choose a Question:")  # Make the Label
     titleLabel.grid(column=0, row=0, padx=15, pady=5)  # Place the label on the screen
 
-    questionList = ttk.Treeview(window, height=(int(HEIGHT / 22)))  # Make the TreeView list
+    questionList = ttk.Treeview(window, height=(int(HEIGHT / 25)))  # Make the TreeView list
     xPadding = 10
     listWidth = WIDTH - 2 * xPadding - 5
     questionList.column("#0", width=listWidth, minwidth=listWidth)

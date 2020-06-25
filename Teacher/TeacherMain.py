@@ -1,8 +1,8 @@
 import tkinter as tk
 import os.path as path
-from Teacher.ChooseQuestion import ChooseQuestion
-from Teacher.DisplayQuestion import DisplayQuestion
-from Teacher.LoadQuestions import LoadQuestions
+from ChooseQuestion import ChooseQuestion
+from DisplayQuestion import DisplayQuestion
+from LoadQuestions import LoadQuestions
 
 
 class TeacherMain:
@@ -32,7 +32,7 @@ class TeacherMain:
         except tk.TclError:
             # Most likely, the window has been closed, so just put something in the log and finish.
             print("Exception")
-            pass
+            return
         self.window.after(0, self.loop)  # Start the next cycle of the loop
 
 
