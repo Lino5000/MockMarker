@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+import tkinter.font as font
 import os.path as path
 from ChooseQuestion import ChooseQuestion
 from DisplayQuestion import DisplayQuestion
@@ -15,6 +16,11 @@ class TeacherMain:
         HEIGHT = self.window.winfo_screenheight()
         self.window.geometry(f"{WIDTH}x{HEIGHT}")
         self.window.resizable(False, False)
+
+        # Change font to be a bit larger
+        defaultFont = font.nametofont("TkDefaultFont")
+        defaultFont.config(size=25)
+        # self.window.option_add("*Font", defaultFont)
 
         currentPath = path.abspath("./Teacher")  # TODO: Update Path for build version
         # Small error handling thing added very late in the process, to account for missing file.

@@ -27,11 +27,15 @@ def ChooseQuestion(questions, window):
     titleLabel = tk.Label(window, text="Choose a Question:")  # Make the Label
     titleLabel.grid(column=0, row=0, padx=15, pady=5)  # Place the label on the screen
 
-    questionList = ttk.Treeview(window, height=(int(HEIGHT / 25)))  # Make the TreeView list
+    rowHeight = 40
+    style = ttk.Style(window)
+    style.configure('Treeview', rowheight=rowHeight)
+    questionList = ttk.Treeview(window, style='Treeview',
+                                height=(int(HEIGHT / (rowHeight + 15))))  # Make the TreeView list
     xPadding = 10
     listWidth = WIDTH - 2 * xPadding - 5
     questionList.column("#0", width=listWidth, minwidth=listWidth)
-    questionList.heading("#0", text="Question", anchor=tk.W)  # Set the heading of the list
+    questionList.heading("#0", text="", anchor=tk.W)  # Set the heading of the list
     for index in range(len(questions)):
         if questions[index].Desc is not None:
             item = questions[index].Desc
