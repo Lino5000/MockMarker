@@ -52,6 +52,7 @@ def LoadQuestions(filename):
                     qIndex += 1
                 else:
                     unloaded.append(questions[qIndex].Code)
+                    uIndex += 1
                     questions[qIndex].Band = 0
                     questions[qIndex].Pos = []
                     questions[qIndex].Neg = []
@@ -76,9 +77,9 @@ def LoadQuestions(filename):
                 for item in temp.split(','):
                     questions[qIndex].Neg.append(item.strip(' '))
             else:
-                pass  # Just to make it explicit.
+                pass  # Just to make it explicit that nothing should be done.
         if not isCompleteQuestion(questions[qIndex]):
-            unloaded[uIndex] = questions[qIndex].Code
+            unloaded.append(questions[qIndex].Code)
             del questions[qIndex]
         if len(unloaded) > 0:
             DisplayPopup(unloaded)
