@@ -11,54 +11,6 @@ def clearWindow(window):
         widget.destroy()
 
 
-def MakeStrengthMeter(strength, window):
-    rectWidth = 20
-    rectHeight = 20
-    offset = 3  # Canvas Element has weird coordinates, need an offset so the border is visible.
-
-    meterCanvas = tk.Canvas(
-        window,
-        width=rectWidth * 4 + offset,
-        height=rectHeight * 4 + offset,
-        bg='white',
-        highlightthickness=0
-    )
-
-    if strength >= 0.25:
-        colour1 = 'red'
-    else:
-        colour1 = 'grey'
-    meterCanvas.create_rectangle(
-        offset, rectHeight * 3 + offset, rectWidth + offset, rectHeight * 4 + offset, fill=colour1
-    )
-
-    if strength >= 0.5:
-        colour2 = 'orange'
-    else:
-        colour2 = 'grey'
-    meterCanvas.create_rectangle(
-        rectWidth + offset, rectHeight * 2 + offset, rectWidth * 2 + offset, rectHeight * 4 + offset, fill=colour2
-    )
-
-    if strength >= 0.75:
-        colour3 = 'yellow'
-    else:
-        colour3 = 'grey'
-    meterCanvas.create_rectangle(
-        rectWidth * 2 + offset, rectHeight + offset, rectWidth * 3 + offset, rectHeight * 4 + offset, fill=colour3
-    )
-
-    if strength >= 1:
-        colour4 = 'green'
-    else:
-        colour4 = 'grey'
-    meterCanvas.create_rectangle(
-        rectWidth * 3 + offset, offset, rectWidth * 4 + offset, rectHeight * 4 + offset, fill=colour4
-    )
-
-    return meterCanvas
-
-
 answering = True
 
 
@@ -181,8 +133,6 @@ def DisplayQuestion(question, window):
     posExpectedText.config(state=tk.DISABLED)
     posExpectedText.grid(row=0, column=0, padx=3, pady=3)
 
-    posStrength = MakeStrengthMeter(studentMark.PosScore, alignmentFrame)
-
     negExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:", bg='white')
     if len(studentMark.NegList) > 0:
         negExpected = studentMark.NegList[0]
@@ -198,8 +148,6 @@ def DisplayQuestion(question, window):
     negExpectedText.config(state=tk.DISABLED)
     negExpectedText.grid(row=0, column=0, padx=3, pady=3)
 
-    negStrength = MakeStrengthMeter(studentMark.NegScore, alignmentFrame)
-
     doneButton = tk.Button(alignmentFrame, text="Done", command=closeMarks)
 
     codeLabel.grid(row=0, column=2, padx=5, pady=5, sticky='ne')
@@ -209,13 +157,13 @@ def DisplayQuestion(question, window):
 
     posLabel.grid(row=2, column=0, padx=10, pady=2)
     posTextBorder.grid(row=3, column=0, padx=0, pady=3)
-    posStrength.grid(row=3, column=1, padx=0, pady=3)
+    # posStrength.grid(row=3, column=1, padx=0, pady=3)  # Might add a replacement for the strength meters.
     posExpectedLabel.grid(row=2, column=2, padx=10, pady=2)
     posExpectedTextBorder.grid(row=3, column=2, padx=0, pady=3)
 
     negLabel.grid(row=4, column=0, padx=10, pady=2)
     negTextBorder.grid(row=5, column=0, padx=0, pady=3)
-    negStrength.grid(row=5, column=1, padx=0, pady=3)
+    # negStrength.grid(row=5, column=1, padx=0, pady=3)  # Might add a replacement for the strength meters.
     negExpectedLabel.grid(row=4, column=2, padx=10, pady=2)
     negExpectedTextBorder.grid(row=5, column=2, padx=0, pady=3)
 
