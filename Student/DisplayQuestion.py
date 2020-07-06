@@ -119,10 +119,10 @@ def DisplayQuestion(question, window):
         correctBandLabel.config(fg='red')
 
     posExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:", bg='white')
-    if len(studentMark.PosList) > 0:
-        posExpected = studentMark.PosList[0]
-        for index in range(1, len(studentMark.PosList)):
-            posExpected += ", " + studentMark.PosList[index]
+    if len(question.Pos) > 0:
+        posExpected = question.Pos[0]
+        for index in range(1, len(question.Pos)):
+            posExpected += ", " + question.Pos[index]
     else:
         posExpected = ''
     posExpectedTextBorder = tk.Frame(alignmentFrame, bg='black')
@@ -134,10 +134,10 @@ def DisplayQuestion(question, window):
     posExpectedText.grid(row=0, column=0, padx=3, pady=3)
 
     negExpectedLabel = tk.Label(alignmentFrame, text="Expected Phrases:", bg='white')
-    if len(studentMark.NegList) > 0:
-        negExpected = studentMark.NegList[0]
-        for index in range(1, len(studentMark.NegList)):
-            negExpected += ", " + studentMark.NegList[index]
+    if len(question.Neg) > 0:
+        negExpected = question.Neg[0]
+        for index in range(1, len(question.Neg)):
+            negExpected += ", " + question.Neg[index]
     else:
         negExpected = ''
     negExpectedTextBorder = tk.Frame(alignmentFrame, bg='black')
