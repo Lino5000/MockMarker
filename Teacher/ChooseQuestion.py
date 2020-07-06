@@ -8,8 +8,9 @@ def clearWindow(window):
         widget.destroy()
 
 
-def submit():
+def submit(arg=None):
     # A callback function so that the submit button can change the submitted variable.
+    # The arg=None argument is not actually used, it just stops tkinter causing an error in the double-click binding.
     global submitted
     submitted = True
 
@@ -32,6 +33,7 @@ def ChooseQuestion(questions, window):
     style.configure('Treeview', rowheight=rowHeight)
     questionList = ttk.Treeview(window, style='Treeview',
                                 height=(int(HEIGHT / (rowHeight + 15))))  # Make the TreeView list
+    questionList.bind("<Double-Button-1>", submit)  # Bind double click to submit, it handles selecting the option.
     xPadding = 10
     listWidth = WIDTH - 2 * xPadding - 5
     questionList.column("#0", width=listWidth, minwidth=listWidth)
