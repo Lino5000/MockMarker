@@ -1,2 +1,4 @@
 /venv/
 /.idea/
+/Student/__pycache__/
+/Teacher/__pycache__/
