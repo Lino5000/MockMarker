@@ -44,9 +44,9 @@ class TeacherMain:
         try:
             question = ChooseQuestion(self.questions, self.window)
             DisplayQuestion(question, self.window)
-        except tk.TclError:
+        except tk.TclError as e:
             # Most likely, the window has been closed, so just put something in the log and finish.
-            print("Exception")
+            print(f"Exception: {e}")
             return
         self.window.after(0, self.loop)  # Start the next cycle of the loop
 
