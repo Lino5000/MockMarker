@@ -10,13 +10,56 @@ def clearWindow(window):
         widget.destroy()
 
 
-def loadImage(imageName, WIDTH, HEIGHT):
+def zoom(canvas, img, event):
+    global imgtk
+    # Callback for zooming
+    width, height = img.size
+    if event.delta > 0:
+        img = img.resize((int(width * 1.2), int(height * 1.2)), Image.ANTIALIAS)
+    elif event.delta < 0:
+        img = img.resize((int(width * 0.8), int(height * 0.8)), Image.ANTIALIAS)
+    imgtk = ImageTk.PhotoImage(img)
+    canvImg = canvas.find_all()[0]
+    canvas.itemconfig(canvImg, image=imgtk)
+    canvas.configure(scrollregion=canvas.bbox(tk.ALL))
+
+
+imgtk = None
+
+
+def loadImage(imageName, parent, window):
+    global imgtk
+    WIDTH = window.winfo_screenwidth()
+    HEIGHT = window.winfo_screenheight()
     # Loads the image called imageName from the Images Folder, and puts it in a tkinter compatible object.
     p = path.abspath("./Teacher/Images/" + imageName)  # TODO: Update Path
     img = Image.open(p)
-    geom = (int(WIDTH * 0.8), int(HEIGHT * 0.7))
-    img = img.resize(geom)
-    return ImageTk.PhotoImage(img)
+    imgtk = ImageTk.PhotoImage(img)
+
+    # Make the Frame to provide scroll bars and zooming.
+    frame = tk.Frame(parent)
+    # Canvas to hold the image
+    canv = tk.Canvas(frame)
+    canv.config(width=int(0.9 * WIDTH), height=int(0.7 * HEIGHT))
+    canv.config(highlightthickness=0)
+    # Add scroll bars
+    scrollV = tk.Scrollbar(frame, orient=tk.VERTICAL, command=canv.yview)
+    scrollH = tk.Scrollbar(frame, orient=tk.HORIZONTAL, command=canv.xview)
+    canv.config(yscrollcommand=scrollV.set)
+    canv.config(xscrollcommand=scrollH.set)
+
+    scrollV.grid(row=0, rowspan=2, column=1, sticky='ns')
+    scrollH.grid(row=1, column=0, sticky='ew')
+    canv.grid(row=0, column=0, sticky='nsew')
+
+    width, height = img.size
+    canv.config(scrollregion=(0, 0, width, height))
+
+    canv.create_image(0, 0, anchor='nw', image=imgtk)
+
+    canv.bind("<MouseWheel>", (lambda e: zoom(canv, img, e)))
+
+    return frame
 
 
 # This section is related to the Popup for a missing Image.
@@ -84,7 +127,7 @@ def DisplayQuestion(question, window):
     contBoolean = True
     if question.Img is not None:
         try:
-            questionImage = loadImage(question.Img, WIDTH, HEIGHT)
+            questionImage = loadImage(question.Img, alignmentFrame, window)
             imagePresent = True
         except FileNotFoundError:
             contBoolean = displayPopup(0)
@@ -97,8 +140,7 @@ def DisplayQuestion(question, window):
 
         if imagePresent:
             # PyCharm reckons questionImage may not be set, but it will because that's the way imagePresent gets set.
-            imageLabel = tk.Label(alignmentFrame, image=questionImage)
-            imageLabel.grid(row=1, column=0, columnspan=2, pady=5)
+            questionImage.grid(row=1, column=0, columnspan=2, pady=5)
 
         if question.Desc is not None:
             descLabel = tk.Label(alignmentFrame, text=question.Desc)
