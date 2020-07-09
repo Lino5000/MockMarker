@@ -20,7 +20,7 @@ class StudentMain:
         self.window.resizable(False, False)
         self.window.config(bg='white')
 
-        currentPath = path.abspath(".")  # TODO: Update Path for build version
+        currentPath = path.abspath(".")
         # Small error handling thing added very late in the process, to account for missing file.
         try:
             self.questions = LoadQuestions(currentPath + "/Questions.txt")
