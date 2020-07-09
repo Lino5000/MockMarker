@@ -65,9 +65,9 @@ def loadImage(imageName, parent, window):
     canv.create_image(0, 0, anchor='nw', image=imgtk)
 
     # Add the Zoom buttons
-    zoomInButton = tk.Button(frame, text='+', command=(lambda: zoom(canv, 1)))
+    zoomInButton = tk.Button(frame, text='+', font=(None, 20), command=(lambda: zoom(canv, 1)))
     zoomInButton.grid(row=2, column=1, padx=10, pady=5, sticky='e')
-    zoomOutButton = tk.Button(frame, text='-', command=(lambda: zoom(canv, -1)))
+    zoomOutButton = tk.Button(frame, text='-', font=(None, 20), command=(lambda: zoom(canv, -1)))
     zoomOutButton.grid(row=2, column=2, padx=10, pady=5, sticky='w')
 
     # Bind the mouse wheel to the scroll
@@ -158,10 +158,10 @@ def DisplayQuestion(question, window):
             questionImage.grid(row=1, column=0, columnspan=2, pady=5)
 
         if question.Desc is not None:
-            descLabel = tk.Label(alignmentFrame, text=question.Desc)
+            descLabel = tk.Label(alignmentFrame, text=question.Desc, font=(None, 18))
             descLabel.grid(row=2, column=0, columnspan=2, pady=5)
 
-        doneButton = tk.Button(alignmentFrame, text="Done", command=done)
+        doneButton = tk.Button(alignmentFrame, text="Done", font=(None, 20), command=done)
         doneButton.grid(row=3, column=0, columnspan=2, pady=5)
 
         # Work out the width of the frame and move it to the center of the screen. Unfortunately causes the question
