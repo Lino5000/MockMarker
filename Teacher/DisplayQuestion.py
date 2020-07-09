@@ -10,13 +10,13 @@ def clearWindow(window):
         widget.destroy()
 
 
-def zoom(canvas, img, event):
-    global imgtk
+def zoom(canvas, direction):
+    global imgtk, img
     # Callback for zooming
     width, height = img.size
-    if event.delta > 0:
+    if direction > 0:
         img = img.resize((int(width * 1.2), int(height * 1.2)), Image.ANTIALIAS)
-    elif event.delta < 0:
+    elif direction < 0:
         img = img.resize((int(width * 0.8), int(height * 0.8)), Image.ANTIALIAS)
     imgtk = ImageTk.PhotoImage(img)
     canvImg = canvas.find_all()[0]
@@ -24,11 +24,13 @@ def zoom(canvas, img, event):
     canvas.configure(scrollregion=canvas.bbox(tk.ALL))
 
 
+# Need to keep a reference to the image so that it doesn't get forgotten by Python's Garbage Collection.
 imgtk = None
+img = None
 
 
 def loadImage(imageName, parent, window):
-    global imgtk
+    global imgtk, img
     WIDTH = window.winfo_screenwidth()
     HEIGHT = window.winfo_screenheight()
     # Loads the image called imageName from the Images Folder, and puts it in a tkinter compatible object.
@@ -48,16 +50,26 @@ def loadImage(imageName, parent, window):
     canv.config(yscrollcommand=scrollV.set)
     canv.config(xscrollcommand=scrollH.set)
 
-    scrollV.grid(row=0, rowspan=2, column=1, sticky='ns')
-    scrollH.grid(row=1, column=0, sticky='ew')
-    canv.grid(row=0, column=0, sticky='nsew')
+    scrollV.grid(row=0, rowspan=2, column=4, sticky='ns')
+    scrollH.grid(row=1, column=0, columnspan=4, sticky='ew')
+    canv.grid(row=0, column=0, columnspan=4, sticky='nsew')
 
+    # Set up scrollable region
     width, height = img.size
     canv.config(scrollregion=(0, 0, width, height))
 
+    # Add the image to the canvas
     canv.create_image(0, 0, anchor='nw', image=imgtk)
 
-    canv.bind("<MouseWheel>", (lambda e: zoom(canv, img, e)))
+    # Add the Zoom buttons
+    zoomInButton = tk.Button(frame, text='+', command=(lambda: zoom(canv, 1)))
+    zoomInButton.grid(row=2, column=1, padx=10, pady=5, sticky='e')
+    zoomOutButton = tk.Button(frame, text='-', command=(lambda: zoom(canv, -1)))
+    zoomOutButton.grid(row=2, column=2, padx=10, pady=5, sticky='w')
+
+    # Bind the mouse wheel to the scroll
+    # TODO: Change to //120 for Windows
+    window.bind_all("<MouseWheel>", (lambda e: canv.yview_scroll(-1 * (e.delta // 1), "units")))
 
     return frame
 
