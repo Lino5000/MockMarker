@@ -10,33 +10,36 @@ def clearWindow(window):
         widget.destroy()
 
 
+# Need to keep a reference to the image so that it doesn't get forgotten by Python's Garbage Collection.
+imgtk = None
+origImg = None
+scaleFactor = 1
+
+
 def zoom(canvas, direction):
-    global imgtk, img
+    global imgtk, origImg, scaleFactor
     # Callback for zooming
-    width, height = img.size
+    width, height = origImg.size
     if direction > 0:
-        img = img.resize((int(width * 1.2), int(height * 1.2)), Image.ANTIALIAS)
+        scaleFactor *= 1.2
+        img = origImg.resize((int(width * scaleFactor), int(height * scaleFactor)), Image.ANTIALIAS)
     elif direction < 0:
-        img = img.resize((int(width * 0.8), int(height * 0.8)), Image.ANTIALIAS)
+        scaleFactor *= 0.8
+        img = origImg.resize((int(width * scaleFactor), int(height * scaleFactor)), Image.ANTIALIAS)
     imgtk = ImageTk.PhotoImage(img)
     canvImg = canvas.find_all()[0]
     canvas.itemconfig(canvImg, image=imgtk)
     canvas.configure(scrollregion=canvas.bbox(tk.ALL))
 
 
-# Need to keep a reference to the image so that it doesn't get forgotten by Python's Garbage Collection.
-imgtk = None
-img = None
-
-
 def loadImage(imageName, parent, window):
-    global imgtk, img
+    global imgtk, origImg
     WIDTH = window.winfo_screenwidth()
     HEIGHT = window.winfo_screenheight()
     # Loads the image called imageName from the Images Folder, and puts it in a tkinter compatible object.
     p = path.abspath("./Teacher/Images/" + imageName)  # TODO: Update Path
-    img = Image.open(p)
-    imgtk = ImageTk.PhotoImage(img)
+    origImg = Image.open(p)
+    imgtk = ImageTk.PhotoImage(origImg)
 
     # Make the Frame to provide scroll bars and zooming.
     frame = tk.Frame(parent)
@@ -55,7 +58,7 @@ def loadImage(imageName, parent, window):
     canv.grid(row=0, column=0, columnspan=4, sticky='nsew')
 
     # Set up scrollable region
-    width, height = img.size
+    width, height = origImg.size
     canv.config(scrollregion=(0, 0, width, height))
 
     # Add the image to the canvas
